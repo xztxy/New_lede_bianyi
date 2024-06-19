@@ -3,8 +3,8 @@ name: Build x86_64_6.6
 on:
   repository_dispatch:
   workflow_dispatch:
-#  schedule:
-#    - cron: '0 18 * * 5'
+  schedule:
+    - cron: '23 17 * * *'
 #  watch:
 #    types: started
 
