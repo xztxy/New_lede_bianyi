@@ -3,10 +3,10 @@ name: Build x86_64_6.6
 on:
   repository_dispatch:
   workflow_dispatch:
-# schedule:
-#   - cron: '24 19 * * *'
-  watch:
-    types: started
+#  schedule:
+#    - cron: '0 18 * * 5'
+#  watch:
+#    types: started
 
 env:
   REPO_URL: https://github.com/coolsnowwolf/lede
