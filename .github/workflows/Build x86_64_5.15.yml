@@ -1,8 +1,9 @@
 name: Build x86_64_5.15
 
 on:
-  repository_dispatch:
-  workflow_dispatch:
+on:
+# repository_dispatch:
+# workflow_dispatch:
 #  schedule:
 #    - cron: '0 18 * * 5'
 #  watch:
