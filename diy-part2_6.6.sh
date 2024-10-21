@@ -6,6 +6,7 @@ function merge_package() {
     # 参数1是分支名,参数2是库地址,参数3是所有文件下载到指定路径。
     # 同一个仓库下载多个文件夹直接在后面跟文件名或路径，空格分开。
     if [[ $# -lt 3 ]]; then
+    
     	echo "Syntax error: [$#] [$*]" >&2
         return 1
     fi
@@ -42,10 +43,10 @@ sed -i 's/luci-theme-bootstrap/luci-theme-argon-mod/g' feeds/luci/collections/lu
 sed -i 's/luci-theme-bootstrap/luci-theme-argon-mod/g' feeds/luci/collections/luci-ssl-nginx/Makefile
 
 # 修改主机名以及一些显示信息
-sed -i "s/hostname='*.*'/hostname='Momo'/" package/base-files/files/bin/config_generate
+sed -i "s/hostname='*.*'/hostname='JUMP'/" package/base-files/files/bin/config_generate
 sed -i "s/DISTRIB_ID='*.*'/DISTRIB_ID='OpenWrt'/g" package/base-files/files/etc/openwrt_release
 sed -i "s/DISTRIB_DESCRIPTION='*.*'/DISTRIB_DESCRIPTION='OpenWrt'/g"  package/base-files/files/etc/openwrt_release
-sed -i '/(<%=pcdata(ver.luciversion)%>)/a\      built by Momo' package/lean/autocore/files/x86/index.htm
+sed -i '/(<%=pcdata(ver.luciversion)%>)/a\      built by JUMP' package/lean/autocore/files/x86/index.htm
 echo -n "$(date +'%Y%m%d')" > package/base-files/files/etc/openwrt_version
 curl -fsSL https://raw.githubusercontent.com/ywt114/diy/main/banner_JUMP > package/base-files/files/etc/banner
 
@@ -63,7 +64,7 @@ sed -i "s/echo '\[ -n/echo '# \[ -n/g" package/lean/default-settings/files/zzz-d
 
 # 开启wifi选项
 sed -i 's/disabled=*.*/disabled=0/g' package/kernel/mac80211/files/lib/wifi/mac80211.sh
-sed -i 's/ssid=*.*/ssid=Momo/g' package/kernel/mac80211/files/lib/wifi/mac80211.sh
+sed -i 's/ssid=*.*/ssid=JUMP/g' package/kernel/mac80211/files/lib/wifi/mac80211.sh
 
 # 添加关机按钮到系统选项
 curl -fsSL https://raw.githubusercontent.com/ywt114/diy/main/poweroff.htm > feeds/luci/modules/luci-mod-admin-full/luasrc/view/admin_system/poweroff.htm
@@ -74,10 +75,10 @@ curl -fsSL https://raw.githubusercontent.com/ywt114/diy/main/system.lua > feeds/
 # find ./ | grep Makefile | grep pdnsd-alt | xargs rm -f
 \rm -rf feeds/packages/net/v2ray-geodata feeds/packages/net/pdnsd-alt
 \rm -rf feeds/packages/lang/golang
-git clone -b 23.x https://github.com/sbwml/packages_lang_golang feeds/packages/lang/golang
+git clone -b 22.x https://github.com/sbwml/packages_lang_golang feeds/packages/lang/golang
 # rm -rf feeds/packages/net/curl
 # git clone -b main https://github.com/sbwml/feeds_packages_net_curl feeds/packages/net/curl
-git clone -b lua https://github.com/sbwml/luci-app-alist package/lean/alist
+git clone -b master https://github.com/sbwml/luci-app-alist package/lean/alist
 \rm -rf feeds/packages/net/mosdns feeds/luci/applications/luci-app-mosdns feeds/packages/utils/v2dat
 git clone -b v5-lua https://github.com/sbwml/luci-app-mosdns package/lean/mosdns
 \rm -rf feeds/luci/applications/luci-app-adbyby-plus
