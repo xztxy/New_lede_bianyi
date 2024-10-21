@@ -27,7 +27,7 @@ function merge_package() {
 }
 
 # 修改管理地址
-sed -i 's/192.168.1.1/192.168.15.1/g' package/base-files/files/bin/config_generate
+sed -i 's/192.168.1.1/192.168.1.1/g' package/base-files/files/bin/config_generate
 
 # 交换LAN/WAN口
 sed -i 's/"eth1 eth2" "eth0"/"eth1 eth2" "eth0"/g' target/linux/x86/base-files/etc/board.d/02_network
@@ -42,10 +42,10 @@ sed -i 's/luci-theme-bootstrap/luci-theme-argon-mod/g' feeds/luci/collections/lu
 sed -i 's/luci-theme-bootstrap/luci-theme-argon-mod/g' feeds/luci/collections/luci-ssl-nginx/Makefile
 
 # 修改主机名以及一些显示信息
-sed -i "s/hostname='*.*'/hostname='Momo'/" package/base-files/files/bin/config_generate
+sed -i "s/hostname='*.*'/hostname='JUMP'/" package/base-files/files/bin/config_generate
 sed -i "s/DISTRIB_ID='*.*'/DISTRIB_ID='OpenWrt'/g" package/base-files/files/etc/openwrt_release
 sed -i "s/DISTRIB_DESCRIPTION='*.*'/DISTRIB_DESCRIPTION='OpenWrt'/g"  package/base-files/files/etc/openwrt_release
-sed -i '/(<%=pcdata(ver.luciversion)%>)/a\      built by Momo' package/lean/autocore/files/x86/index.htm
+sed -i '/(<%=pcdata(ver.luciversion)%>)/a\      built by JUMP' package/lean/autocore/files/x86/index.htm
 echo -n "$(date +'%Y%m%d')" > package/base-files/files/etc/openwrt_version
 curl -fsSL https://raw.githubusercontent.com/ywt114/diy/main/banner_JUMP > package/base-files/files/etc/banner
 
@@ -63,7 +63,7 @@ sed -i "s/echo '\[ -n/echo '# \[ -n/g" package/lean/default-settings/files/zzz-d
 
 # 开启wifi选项
 sed -i 's/disabled=*.*/disabled=0/g' package/kernel/mac80211/files/lib/wifi/mac80211.sh
-sed -i 's/ssid=*.*/ssid=Momo/g' package/kernel/mac80211/files/lib/wifi/mac80211.sh
+sed -i 's/ssid=*.*/ssid=JUMP/g' package/kernel/mac80211/files/lib/wifi/mac80211.sh
 
 # 添加关机按钮到系统选项
 curl -fsSL https://raw.githubusercontent.com/ywt114/diy/main/poweroff.htm > feeds/luci/modules/luci-mod-admin-full/luasrc/view/admin_system/poweroff.htm
@@ -74,12 +74,12 @@ curl -fsSL https://raw.githubusercontent.com/ywt114/diy/main/system.lua > feeds/
 # find ./ | grep Makefile | grep pdnsd-alt | xargs rm -f
 \rm -rf feeds/packages/net/v2ray-geodata feeds/packages/net/pdnsd-alt
 \rm -rf feeds/packages/lang/golang
-git clone -b 23.x https://github.com/sbwml/packages_lang_golang feeds/packages/lang/golang
+git clone -b 22.x https://github.com/sbwml/packages_lang_golang feeds/packages/lang/golang
 # rm -rf feeds/packages/net/curl
 # git clone -b main https://github.com/sbwml/feeds_packages_net_curl feeds/packages/net/curl
-git clone -b lua https://github.com/sbwml/luci-app-alist package/lean/alist
+git clone -b master https://github.com/sbwml/luci-app-alist package/lean/alist
 \rm -rf feeds/packages/net/mosdns feeds/luci/applications/luci-app-mosdns feeds/packages/utils/v2dat
-git clone -b v5-lua https://github.com/sbwml/luci-app-mosdns package/lean/mosdns
+git clone -b v5 https://github.com/sbwml/luci-app-mosdns package/lean/mosdns
 \rm -rf feeds/luci/applications/luci-app-adbyby-plus
 git clone -b main https://github.com/ywt114/luci-app-adbyby-plus-lite package/lean/luci-app-adbyby-plus-lite
 \rm -rf feeds/packages/net/msd_lite
@@ -154,4 +154,3 @@ git reset --hard ecd92aa64174f5e7a200678b4122891764a6b245
 cd ../../../..
 \cp -rf package/lean/mosdns/v2dat package/lean/small
 sed -i 's/CGO_ENABLED=0/CGO_ENABLED=1/g' package/lean/small/sing-box/Makefile
-sed -i "s/'http/'https/g" package/lean/small/luci-app-passwall/luasrc/view/passwall/global/status.htm
