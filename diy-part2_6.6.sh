@@ -6,7 +6,6 @@ function merge_package() {
     # 参数1是分支名,参数2是库地址,参数3是所有文件下载到指定路径。
     # 同一个仓库下载多个文件夹直接在后面跟文件名或路径，空格分开。
     if [[ $# -lt 3 ]]; then
-    
     	echo "Syntax error: [$#] [$*]" >&2
         return 1
     fi
@@ -75,10 +74,10 @@ curl -fsSL https://raw.githubusercontent.com/ywt114/diy/main/system.lua > feeds/
 # find ./ | grep Makefile | grep pdnsd-alt | xargs rm -f
 \rm -rf feeds/packages/net/v2ray-geodata feeds/packages/net/pdnsd-alt
 \rm -rf feeds/packages/lang/golang
-git clone -b 22.x https://github.com/sbwml/packages_lang_golang feeds/packages/lang/golang
+git clone -b 23.x https://github.com/sbwml/packages_lang_golang feeds/packages/lang/golang
 # rm -rf feeds/packages/net/curl
 # git clone -b main https://github.com/sbwml/feeds_packages_net_curl feeds/packages/net/curl
-git clone -b master https://github.com/sbwml/luci-app-alist package/lean/alist
+git clone -b lua https://github.com/sbwml/luci-app-alist package/lean/alist
 \rm -rf feeds/packages/net/mosdns feeds/luci/applications/luci-app-mosdns feeds/packages/utils/v2dat
 git clone -b v5-lua https://github.com/sbwml/luci-app-mosdns package/lean/mosdns
 \rm -rf feeds/luci/applications/luci-app-adbyby-plus
