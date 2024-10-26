@@ -42,10 +42,10 @@ sed -i 's/luci-theme-bootstrap/luci-theme-argon-mod/g' feeds/luci/collections/lu
 sed -i 's/luci-theme-bootstrap/luci-theme-argon-mod/g' feeds/luci/collections/luci-ssl-nginx/Makefile
 
 # 修改主机名以及一些显示信息
-sed -i "s/hostname='*.*'/hostname='JUMP'/" package/base-files/files/bin/config_generate
+sed -i "s/hostname='*.*'/hostname='Momo'/" package/base-files/files/bin/config_generate
 sed -i "s/DISTRIB_ID='*.*'/DISTRIB_ID='OpenWrt'/g" package/base-files/files/etc/openwrt_release
 sed -i "s/DISTRIB_DESCRIPTION='*.*'/DISTRIB_DESCRIPTION='OpenWrt'/g"  package/base-files/files/etc/openwrt_release
-sed -i '/(<%=pcdata(ver.luciversion)%>)/a\      built by JUMP' package/lean/autocore/files/x86/index.htm
+sed -i '/(<%=pcdata(ver.luciversion)%>)/a\      built by Momo' package/lean/autocore/files/x86/index.htm
 echo -n "$(date +'%Y%m%d')" > package/base-files/files/etc/openwrt_version
 curl -fsSL https://raw.githubusercontent.com/ywt114/diy/main/banner_JUMP > package/base-files/files/etc/banner
 
@@ -63,7 +63,7 @@ sed -i "s/echo '\[ -n/echo '# \[ -n/g" package/lean/default-settings/files/zzz-d
 
 # 开启wifi选项
 sed -i 's/disabled=*.*/disabled=0/g' package/kernel/mac80211/files/lib/wifi/mac80211.sh
-sed -i 's/ssid=*.*/ssid=JUMP/g' package/kernel/mac80211/files/lib/wifi/mac80211.sh
+sed -i 's/ssid=*.*/ssid=Momo/g' package/kernel/mac80211/files/lib/wifi/mac80211.sh
 
 # 添加关机按钮到系统选项
 curl -fsSL https://raw.githubusercontent.com/ywt114/diy/main/poweroff.htm > feeds/luci/modules/luci-mod-admin-full/luasrc/view/admin_system/poweroff.htm
@@ -72,14 +72,15 @@ curl -fsSL https://raw.githubusercontent.com/ywt114/diy/main/system.lua > feeds/
 # 删除替换默认源插件和添加插件
 # find ./ | grep Makefile | grep v2ray-geodata | xargs rm -f
 # find ./ | grep Makefile | grep pdnsd-alt | xargs rm -f
-\rm -rf feeds/packages/net/v2ray-geodata feeds/packages/net/pdnsd-alt
+# \rm -rf feeds/packages/net/v2ray-geodata feeds/packages/net/pdnsd-alt
+\rm -rf feeds/packages/net/{v2ray-geodata,pdnsd-alt}
 \rm -rf feeds/packages/lang/golang
-git clone -b 22.x https://github.com/sbwml/packages_lang_golang feeds/packages/lang/golang
+git clone -b 23.x https://github.com/sbwml/packages_lang_golang feeds/packages/lang/golang
 # rm -rf feeds/packages/net/curl
 # git clone -b main https://github.com/sbwml/feeds_packages_net_curl feeds/packages/net/curl
-git clone -b master https://github.com/sbwml/luci-app-alist package/lean/alist
+git clone -b lua https://github.com/sbwml/luci-app-alist package/lean/alist
 \rm -rf feeds/packages/net/mosdns feeds/luci/applications/luci-app-mosdns feeds/packages/utils/v2dat
-git clone -b v5 https://github.com/sbwml/luci-app-mosdns package/lean/mosdns
+git clone -b v5-lua https://github.com/sbwml/luci-app-mosdns package/lean/mosdns
 \rm -rf feeds/luci/applications/luci-app-adbyby-plus
 git clone -b main https://github.com/ywt114/luci-app-adbyby-plus-lite package/lean/luci-app-adbyby-plus-lite
 \rm -rf feeds/packages/net/msd_lite
@@ -89,15 +90,16 @@ git clone -b master https://github.com/ywt114/luci-app-gpsysupgrade package/lean
 git clone -b master https://github.com/pymumu/openwrt-smartdns package/lean/smartdns
 git clone -b lede https://github.com/pymumu/luci-app-smartdns package/lean/luci-app-smartdns
 git clone -b master https://github.com/kenzok8/small package/lean/small
-\rm -rf package/lean/small/luci-app-bypass package/lean/small/luci-app-vssr package/lean/small/luci-app-passwall2
+# \rm -rf package/lean/small/luci-app-bypass package/lean/small/luci-app-homeproxy package/lean/small/luci-app-mihomo package/lean/small/luci-app-mosdns package/lean/small/luci-app-passwall2
+\rm -rf package/lean/small/{*bypass*,*homeproxy*,*mihomo*,*mosdns*,*passwall2*}
 git clone -b main https://github.com/sirpdboy/luci-app-chatgpt-web package/lean/luci-app-chatgpt-web
 git clone -b master https://github.com/sirpdboy/luci-app-advanced package/lean/luci-app-advanced
 git clone -b master https://github.com/sirpdboy/luci-app-autotimeset package/lean/luci-app-autotimeset
 sed -i 's/control"/system"/g' package/lean/luci-app-autotimeset/luasrc/controller/autotimeset.lua
 sed -i 's/control]/system]/g' package/lean/luci-app-autotimeset/luasrc/view/autotimeset/log.htm
-git clone -b master https://github.com/kenzok8/openwrt-packages package/lean/openwrt-packages
-\cp -rf package/lean/openwrt-packages/luci-app-openclash package/lean/small
-\rm -rf package/lean/openwrt-packages
+# git clone -b master https://github.com/kenzok8/openwrt-packages package/lean/openwrt-packages
+# \cp -rf package/lean/openwrt-packages/luci-app-openclash package/lean/small
+# \rm -rf package/lean/openwrt-packages
 \rm -rf feeds/packages/net/socat feeds/luci/applications/luci-app-socat
 git clone -b master https://github.com/xiangfeidexiaohuo/extra-ipk package/lean/extra-ipk
 \cp -rf package/lean/extra-ipk/op-socat package/lean/socat
@@ -154,3 +156,4 @@ git reset --hard ecd92aa64174f5e7a200678b4122891764a6b245
 cd ../../../..
 \cp -rf package/lean/mosdns/v2dat package/lean/small
 sed -i 's/CGO_ENABLED=0/CGO_ENABLED=1/g' package/lean/small/sing-box/Makefile
+sed -i "s/'http/'https/g" package/lean/small/luci-app-passwall/luasrc/view/passwall/global/status.htm
