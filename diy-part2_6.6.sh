@@ -27,7 +27,7 @@ function merge_package() {
 }
 
 # 修改管理地址
-sed -i 's/192.168.1.1/192.168.15.1/g' package/base-files/files/bin/config_generate
+sed -i 's/192.168.1.1/192.168.1.1/g' package/base-files/files/bin/config_generate
 
 # 交换LAN/WAN口
 sed -i 's/"eth1 eth2" "eth0"/"eth1 eth2" "eth0"/g' target/linux/x86/base-files/etc/board.d/02_network
@@ -72,7 +72,8 @@ curl -fsSL https://raw.githubusercontent.com/ywt114/diy/main/system.lua > feeds/
 # 删除替换默认源插件和添加插件
 # find ./ | grep Makefile | grep v2ray-geodata | xargs rm -f
 # find ./ | grep Makefile | grep pdnsd-alt | xargs rm -f
-\rm -rf feeds/packages/net/v2ray-geodata feeds/packages/net/pdnsd-alt
+# \rm -rf feeds/packages/net/v2ray-geodata feeds/packages/net/pdnsd-alt
+\rm -rf feeds/packages/net/{v2ray-geodata,pdnsd-alt}
 \rm -rf feeds/packages/lang/golang
 git clone -b 23.x https://github.com/sbwml/packages_lang_golang feeds/packages/lang/golang
 # rm -rf feeds/packages/net/curl
@@ -89,15 +90,16 @@ git clone -b master https://github.com/ywt114/luci-app-gpsysupgrade package/lean
 git clone -b master https://github.com/pymumu/openwrt-smartdns package/lean/smartdns
 git clone -b lede https://github.com/pymumu/luci-app-smartdns package/lean/luci-app-smartdns
 git clone -b master https://github.com/kenzok8/small package/lean/small
-\rm -rf package/lean/small/luci-app-bypass package/lean/small/luci-app-vssr package/lean/small/luci-app-passwall2
+# \rm -rf package/lean/small/luci-app-bypass package/lean/small/luci-app-homeproxy package/lean/small/luci-app-mihomo package/lean/small/luci-app-mosdns package/lean/small/luci-app-passwall2
+\rm -rf package/lean/small/{*bypass*,*homeproxy*,*mihomo*,*mosdns*,*passwall2*}
 git clone -b main https://github.com/sirpdboy/luci-app-chatgpt-web package/lean/luci-app-chatgpt-web
 git clone -b master https://github.com/sirpdboy/luci-app-advanced package/lean/luci-app-advanced
 git clone -b master https://github.com/sirpdboy/luci-app-autotimeset package/lean/luci-app-autotimeset
 sed -i 's/control"/system"/g' package/lean/luci-app-autotimeset/luasrc/controller/autotimeset.lua
 sed -i 's/control]/system]/g' package/lean/luci-app-autotimeset/luasrc/view/autotimeset/log.htm
-git clone -b master https://github.com/kenzok8/openwrt-packages package/lean/openwrt-packages
-\cp -rf package/lean/openwrt-packages/luci-app-openclash package/lean/small
-\rm -rf package/lean/openwrt-packages
+# git clone -b master https://github.com/kenzok8/openwrt-packages package/lean/openwrt-packages
+# \cp -rf package/lean/openwrt-packages/luci-app-openclash package/lean/small
+# \rm -rf package/lean/openwrt-packages
 \rm -rf feeds/packages/net/socat feeds/luci/applications/luci-app-socat
 git clone -b master https://github.com/xiangfeidexiaohuo/extra-ipk package/lean/extra-ipk
 \cp -rf package/lean/extra-ipk/op-socat package/lean/socat
