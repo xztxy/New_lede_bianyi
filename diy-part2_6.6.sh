@@ -48,6 +48,8 @@ sed -i "s/DISTRIB_DESCRIPTION='*.*'/DISTRIB_DESCRIPTION='OpenWrt'/g"  package/ba
 sed -i '/(<%=pcdata(ver.luciversion)%>)/a\      built by Momo' package/lean/autocore/files/x86/index.htm
 echo -n "$(date +'%Y%m%d')" > package/base-files/files/etc/openwrt_version
 curl -fsSL https://raw.githubusercontent.com/xztxy/New_lede_bianyi/refs/heads/main/banner_Momo > package/base-files/files/etc/banner
+#增加备份lucky
+echo "/etc/lucky" >> package/base-files/files/etc/sysupgrade.conf
 
 # # 修改部分默认设置
 # sed -i "/exit 0/i sed -i '\/oui\/d' \/etc\/opkg\/distfeeds.conf" package/lean/default-settings/files/zzz-default-settings
