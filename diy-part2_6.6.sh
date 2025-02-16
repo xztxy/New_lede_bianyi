@@ -47,7 +47,6 @@ sed -i "s/DISTRIB_ID='*.*'/DISTRIB_ID='OpenWrt'/g" package/base-files/files/etc/
 sed -i "s/DISTRIB_DESCRIPTION='*.*'/DISTRIB_DESCRIPTION='OpenWrt'/g"  package/base-files/files/etc/openwrt_release
 sed -i '/(<%=pcdata(ver.luciversion)%>)/a\      built by Momo' package/lean/autocore/files/x86/index.htm
 echo -n "$(date +'%Y%m%d')" > package/base-files/files/etc/openwrt_version
-#curl -fsSL https://raw.githubusercontent.com/ywt114/diy/main/banner_JUMP > package/base-files/files/etc/banner
 curl -fsSL https://raw.githubusercontent.com/xztxy/New_lede_bianyi/refs/heads/main/banner_Momo > package/base-files/files/etc/banner
 #增加备份lucky
 echo "/etc/lucky" >> package/base-files/files/etc/sysupgrade.conf
@@ -92,8 +91,7 @@ git clone -b master https://github.com/ywt114/luci-app-gpsysupgrade package/lean
 git clone -b master https://github.com/pymumu/openwrt-smartdns package/lean/smartdns
 git clone -b lede https://github.com/pymumu/luci-app-smartdns package/lean/luci-app-smartdns
 git clone -b master https://github.com/kenzok8/small package/lean/small
-# \rm -rf package/lean/small/luci-app-bypass package/lean/small/luci-app-homeproxy package/lean/small/luci-app-mihomo package/lean/small/luci-app-mosdns package/lean/small/luci-app-passwall2
-\rm -rf package/lean/small/{*bypass*,*homeproxy*,*mihomo*,*mosdns*,*passwall2*}
+\rm -rf package/lean/small/{*bypass*,*fchomo*,*homeproxy*,*mihomo*,*mosdns*,*nikki*,*passwall2*}
 sed -i 's/-flto/-flto -Wno-error/g' package/lean/small/shadowsocksr-libev/Makefile
 git clone -b main https://github.com/sirpdboy/luci-app-chatgpt-web package/lean/luci-app-chatgpt-web
 git clone -b master https://github.com/sirpdboy/luci-app-advanced package/lean/luci-app-advanced
@@ -164,3 +162,8 @@ sed -i 's/Variable4 = "*.*"/Variable4 = "6.6"/g' package/lean/luci-app-gpsysupgr
 # \cp -rf package/lean/mosdns/v2dat package/lean/small
 # sed -i 's/CGO_ENABLED=0/CGO_ENABLED=1/g' package/lean/small/sing-box/Makefile
 # sed -i "s/'http/'https/g" package/lean/small/luci-app-passwall/luasrc/view/passwall/global/status.htm
+
+# 回退v2ray-plugin到2024年08月24日旧版本
+# cd package/lean/small/v2ray-plugin
+# git reset --hard 82eac7940f75b6ed59523c728adca179ab001aaf
+# cd ../../../..
