@@ -62,108 +62,108 @@ sed -i "s/sed -i '\/REDIRECT --to-ports/# sed -i '\/REDIRECT --to-ports/g" packa
 sed -i "s/echo 'iptables -t/echo '# iptables -t/g" package/lean/default-settings/files/zzz-default-settings
 sed -i "s/echo '\[ -n/echo '# \[ -n/g" package/lean/default-settings/files/zzz-default-settings
 
-# 开启wifi选项
-sed -i 's/disabled=*.*/disabled=0/g' package/kernel/mac80211/files/lib/wifi/mac80211.sh
-sed -i 's/ssid=*.*/ssid=JUMP/g' package/kernel/mac80211/files/lib/wifi/mac80211.sh
+# # 开启wifi选项
+# sed -i 's/disabled=*.*/disabled=0/g' package/kernel/mac80211/files/lib/wifi/mac80211.sh
+# sed -i 's/ssid=*.*/ssid=JUMP/g' package/kernel/mac80211/files/lib/wifi/mac80211.sh
 
 # 添加关机按钮到系统选项
 curl -fsSL https://raw.githubusercontent.com/ywt114/diy/main/poweroff.htm > feeds/luci/modules/luci-mod-admin-full/luasrc/view/admin_system/poweroff.htm
 curl -fsSL https://raw.githubusercontent.com/ywt114/diy/main/system.lua > feeds/luci/modules/luci-mod-admin-full/luasrc/controller/admin/system.lua
 
-# 删除替换默认源插件和添加插件
-# find ./ | grep Makefile | grep v2ray-geodata | xargs rm -f
-# find ./ | grep Makefile | grep pdnsd-alt | xargs rm -f
-# \rm -rf feeds/packages/net/v2ray-geodata feeds/packages/net/pdnsd-alt
-\rm -rf feeds/packages/net/{v2ray-geodata,pdnsd-alt}
-\rm -rf feeds/packages/lang/golang
-git clone -b 23.x https://github.com/sbwml/packages_lang_golang feeds/packages/lang/golang
-# rm -rf feeds/packages/net/curl
-# git clone -b main https://github.com/sbwml/feeds_packages_net_curl feeds/packages/net/curl
-git clone -b lua https://github.com/sbwml/luci-app-alist package/lean/alist
-\rm -rf feeds/packages/net/mosdns feeds/luci/applications/luci-app-mosdns feeds/packages/utils/v2dat
-git clone -b v5-lua https://github.com/sbwml/luci-app-mosdns package/lean/mosdns
-\rm -rf feeds/luci/applications/luci-app-adbyby-plus
-git clone -b main https://github.com/ywt114/luci-app-adbyby-plus-lite package/lean/luci-app-adbyby-plus-lite
-\rm -rf feeds/packages/net/msd_lite
-git clone -b main https://github.com/ywt114/luci-app-msd_lite package/lean/msd_lite
-git clone -b master https://github.com/ywt114/luci-app-gpsysupgrade package/lean/luci-app-gpsysupgrade
-\rm -rf feeds/packages/net/smartdns feeds/luci/applications/luci-app-smartdns
-git clone -b master https://github.com/pymumu/openwrt-smartdns package/lean/smartdns
-git clone -b lede https://github.com/pymumu/luci-app-smartdns package/lean/luci-app-smartdns
-git clone -b master https://github.com/kenzok8/small package/lean/small
-\rm -rf package/lean/small/{*bypass*,*fchomo*,*homeproxy*,*mihomo*,*mosdns*,*nikki*,*passwall2*}
-sed -i 's/-flto/-flto -Wno-error/g' package/lean/small/shadowsocksr-libev/Makefile
-git clone -b main https://github.com/sirpdboy/luci-app-chatgpt-web package/lean/luci-app-chatgpt-web
-git clone -b master https://github.com/sirpdboy/luci-app-advanced package/lean/luci-app-advanced
-git clone -b master https://github.com/sirpdboy/luci-app-autotimeset package/lean/luci-app-autotimeset
-sed -i 's/control"/system"/g' package/lean/luci-app-autotimeset/luasrc/controller/autotimeset.lua
-sed -i 's/control]/system]/g' package/lean/luci-app-autotimeset/luasrc/view/autotimeset/log.htm
-# git clone -b master https://github.com/kenzok8/openwrt-packages package/lean/openwrt-packages
-# \cp -rf package/lean/openwrt-packages/luci-app-openclash package/lean/small
-# \rm -rf package/lean/openwrt-packages
-\rm -rf feeds/packages/net/socat feeds/luci/applications/luci-app-socat
-git clone -b master https://github.com/xiangfeidexiaohuo/extra-ipk package/lean/extra-ipk
-\cp -rf package/lean/extra-ipk/op-socat package/lean/socat
-\cp -rf package/lean/extra-ipk/op-homebox package/lean/homebox
-\rm -rf package/lean/extra-ipk
-\rm -rf feeds/packages/net/adguardhome feeds/luci/applications/luci-app-adguardhome
-git clone -b main https://github.com/sirpdboy/sirpdboy-package package/lean/sirpdboy-package
-\cp -rf package/lean/sirpdboy-package/adguardhome package/lean
-\cp -rf package/lean/sirpdboy-package/luci-app-adguardhome package/lean
-\rm -rf package/lean/sirpdboy-package
-git clone -b main https://github.com/linkease/openwrt-app-actions package/lean/openwrt-app-actions
-\cp -rf package/lean/openwrt-app-actions/applications/luci-app-multiaccountdial package/lean
-\rm -rf package/lean/openwrt-app-actions
-git clone -b main https://github.com/linkease/istore package/lean/istore
-# sed -i 's/+luci-lib-ipkg/+luci-base/g' package/lean/istore/luci/luci-app-store/Makefile
-\cp -rf package/lean/istore/luci/* package/lean
-\cp -rf package/lean/istore/translations package/lean
-\rm -rf package/lean/istore
-git clone -b main https://github.com/linkease/nas-packages-luci package/lean/nas-packages-luci
-sed -i 's/istorex_template")).leaf/istorex_template"), _("iStoreX"), 3).leaf/g' package/lean/nas-packages-luci/luci/luci-app-istorex/luasrc/controller/istorex.lua
-\cp -rf package/lean/nas-packages-luci/luci/* package/lean
-\rm -rf package/lean/nas-packages-luci
-git clone -b master https://github.com/linkease/nas-packages package/lean/nas-packages
-\cp -rf package/lean/nas-packages/network/services/* package/network/services
-\cp -rf package/lean/nas-packages/multimedia package
-\rm -rf package/lean/nas-packages
-# sed -i 's/fw.koolcenter.com\/binary\/ddnsto/github.com\/ywt114\/diy\/releases\/download\/services/g' package/network/services/ddnsto/Makefile
-# sed -i 's/fw.koolcenter.com\/binary\/iStoreEnhance/github.com\/ywt114\/diy\/releases\/download\/services/g' package/network/services/istoreenhance/Makefile
-# sed -i 's/fw0.koolcenter.com\/binary\/LinkEase\/LinuxStorage/github.com\/ywt114\/diy\/releases\/download\/services/g' package/network/services/linkease/Makefile
-# sed -i 's/fw0.koolcenter.com\/binary\/LinkEase\/AutoUpgrade\/linkmount/github.com\/ywt114\/diy\/releases\/download\/services/g' package/network/services/linkmount/Makefile
+# # 删除替换默认源插件和添加插件
+# # find ./ | grep Makefile | grep v2ray-geodata | xargs rm -f
+# # find ./ | grep Makefile | grep pdnsd-alt | xargs rm -f
+# # \rm -rf feeds/packages/net/v2ray-geodata feeds/packages/net/pdnsd-alt
+# \rm -rf feeds/packages/net/{v2ray-geodata,pdnsd-alt}
+# \rm -rf feeds/packages/lang/golang
+# git clone -b 23.x https://github.com/sbwml/packages_lang_golang feeds/packages/lang/golang
+# # rm -rf feeds/packages/net/curl
+# # git clone -b main https://github.com/sbwml/feeds_packages_net_curl feeds/packages/net/curl
+# git clone -b lua https://github.com/sbwml/luci-app-alist package/lean/alist
+# \rm -rf feeds/packages/net/mosdns feeds/luci/applications/luci-app-mosdns feeds/packages/utils/v2dat
+# git clone -b v5-lua https://github.com/sbwml/luci-app-mosdns package/lean/mosdns
+# \rm -rf feeds/luci/applications/luci-app-adbyby-plus
+# git clone -b main https://github.com/ywt114/luci-app-adbyby-plus-lite package/lean/luci-app-adbyby-plus-lite
+# \rm -rf feeds/packages/net/msd_lite
+# git clone -b main https://github.com/ywt114/luci-app-msd_lite package/lean/msd_lite
+# git clone -b master https://github.com/ywt114/luci-app-gpsysupgrade package/lean/luci-app-gpsysupgrade
+# \rm -rf feeds/packages/net/smartdns feeds/luci/applications/luci-app-smartdns
+# git clone -b master https://github.com/pymumu/openwrt-smartdns package/lean/smartdns
+# git clone -b lede https://github.com/pymumu/luci-app-smartdns package/lean/luci-app-smartdns
+# git clone -b master https://github.com/kenzok8/small package/lean/small
+# \rm -rf package/lean/small/{*bypass*,*fchomo*,*homeproxy*,*mihomo*,*mosdns*,*nikki*,*passwall2*}
+# sed -i 's/-flto/-flto -Wno-error/g' package/lean/small/shadowsocksr-libev/Makefile
+# git clone -b main https://github.com/sirpdboy/luci-app-chatgpt-web package/lean/luci-app-chatgpt-web
+# git clone -b master https://github.com/sirpdboy/luci-app-advanced package/lean/luci-app-advanced
+# git clone -b master https://github.com/sirpdboy/luci-app-autotimeset package/lean/luci-app-autotimeset
+# sed -i 's/control"/system"/g' package/lean/luci-app-autotimeset/luasrc/controller/autotimeset.lua
+# sed -i 's/control]/system]/g' package/lean/luci-app-autotimeset/luasrc/view/autotimeset/log.htm
+# # git clone -b master https://github.com/kenzok8/openwrt-packages package/lean/openwrt-packages
+# # \cp -rf package/lean/openwrt-packages/luci-app-openclash package/lean/small
+# # \rm -rf package/lean/openwrt-packages
+# \rm -rf feeds/packages/net/socat feeds/luci/applications/luci-app-socat
+# git clone -b master https://github.com/xiangfeidexiaohuo/extra-ipk package/lean/extra-ipk
+# \cp -rf package/lean/extra-ipk/op-socat package/lean/socat
+# \cp -rf package/lean/extra-ipk/op-homebox package/lean/homebox
+# \rm -rf package/lean/extra-ipk
+# \rm -rf feeds/packages/net/adguardhome feeds/luci/applications/luci-app-adguardhome
+# git clone -b main https://github.com/sirpdboy/sirpdboy-package package/lean/sirpdboy-package
+# \cp -rf package/lean/sirpdboy-package/adguardhome package/lean
+# \cp -rf package/lean/sirpdboy-package/luci-app-adguardhome package/lean
+# \rm -rf package/lean/sirpdboy-package
+# git clone -b main https://github.com/linkease/openwrt-app-actions package/lean/openwrt-app-actions
+# \cp -rf package/lean/openwrt-app-actions/applications/luci-app-multiaccountdial package/lean
+# \rm -rf package/lean/openwrt-app-actions
+# git clone -b main https://github.com/linkease/istore package/lean/istore
+# # sed -i 's/+luci-lib-ipkg/+luci-base/g' package/lean/istore/luci/luci-app-store/Makefile
+# \cp -rf package/lean/istore/luci/* package/lean
+# \cp -rf package/lean/istore/translations package/lean
+# \rm -rf package/lean/istore
+# git clone -b main https://github.com/linkease/nas-packages-luci package/lean/nas-packages-luci
+# sed -i 's/istorex_template")).leaf/istorex_template"), _("iStoreX"), 3).leaf/g' package/lean/nas-packages-luci/luci/luci-app-istorex/luasrc/controller/istorex.lua
+# \cp -rf package/lean/nas-packages-luci/luci/* package/lean
+# \rm -rf package/lean/nas-packages-luci
+# git clone -b master https://github.com/linkease/nas-packages package/lean/nas-packages
+# \cp -rf package/lean/nas-packages/network/services/* package/network/services
+# \cp -rf package/lean/nas-packages/multimedia package
+# \rm -rf package/lean/nas-packages
+# # sed -i 's/fw.koolcenter.com\/binary\/ddnsto/github.com\/ywt114\/diy\/releases\/download\/services/g' package/network/services/ddnsto/Makefile
+# # sed -i 's/fw.koolcenter.com\/binary\/iStoreEnhance/github.com\/ywt114\/diy\/releases\/download\/services/g' package/network/services/istoreenhance/Makefile
+# # sed -i 's/fw0.koolcenter.com\/binary\/LinkEase\/LinuxStorage/github.com\/ywt114\/diy\/releases\/download\/services/g' package/network/services/linkease/Makefile
+# # sed -i 's/fw0.koolcenter.com\/binary\/LinkEase\/AutoUpgrade\/linkmount/github.com\/ywt114\/diy\/releases\/download\/services/g' package/network/services/linkmount/Makefile
 
-# 创建automake-1.15软连接
-# sudo -E ln -sf /usr/bin/automake /usr/bin/automake-1.15
+# # 创建automake-1.15软连接
+# # sudo -E ln -sf /usr/bin/automake /usr/bin/automake-1.15
 
-# 取消部分config配置
-sed -i 's/iperf3-ssl[[:space:]]*//g' target/linux/x86/Makefile
-# sed -i '/CONFIG_PACKAGE_kmod-usb-audio/d' ./.config
-# echo "# CONFIG_PACKAGE_kmod-usb-audio is not set" >> ./.config
-# echo "# CONFIG_PACKAGE_kmod-media-core is not set" >> ./.config
+# # 取消部分config配置
+# sed -i 's/iperf3-ssl[[:space:]]*//g' target/linux/x86/Makefile
+# # sed -i '/CONFIG_PACKAGE_kmod-usb-audio/d' ./.config
+# # echo "# CONFIG_PACKAGE_kmod-usb-audio is not set" >> ./.config
+# # echo "# CONFIG_PACKAGE_kmod-media-core is not set" >> ./.config
 
-# 修改vermagic版本号
-# curl -fsSL https://raw.githubusercontent.com/ywt114/diy/main/vermagic-6.6 > vermagic
-# sed -i 's/grep '\''=\[ym\]'\'' $(LINUX_DIR)\/.config.set | LC_ALL=C sort | $(MKHASH) md5 >/cp $(TOPDIR)\/vermagic/g' include/kernel-defaults.mk
-# sed -i 's/$(SCRIPT_DIR)\/kconfig.pl $(LINUX_DIR)\/.config | $(MKHASH) md5/cat $(LINUX_DIR)\/.vermagic/g' package/kernel/linux/Makefile
+# # 修改vermagic版本号
+# # curl -fsSL https://raw.githubusercontent.com/ywt114/diy/main/vermagic-6.6 > vermagic
+# # sed -i 's/grep '\''=\[ym\]'\'' $(LINUX_DIR)\/.config.set | LC_ALL=C sort | $(MKHASH) md5 >/cp $(TOPDIR)\/vermagic/g' include/kernel-defaults.mk
+# # sed -i 's/$(SCRIPT_DIR)\/kconfig.pl $(LINUX_DIR)\/.config | $(MKHASH) md5/cat $(LINUX_DIR)\/.vermagic/g' package/kernel/linux/Makefile
 
-sed -i 's/Variable1 = "*.*"/Variable1 = "ywt114"/g' package/lean/luci-app-gpsysupgrade/luasrc/model/cbi/gpsysupgrade/sysupgrade.lua
-sed -i 's/Variable2 = "*.*"/Variable2 = "jump"/g' package/lean/luci-app-gpsysupgrade/luasrc/model/cbi/gpsysupgrade/sysupgrade.lua
-sed -i 's/Variable3 = "*.*"/Variable3 = "x86_64"/g' package/lean/luci-app-gpsysupgrade/luasrc/model/cbi/gpsysupgrade/sysupgrade.lua
-sed -i 's/Variable4 = "*.*"/Variable4 = "6.6"/g' package/lean/luci-app-gpsysupgrade/luasrc/model/cbi/gpsysupgrade/sysupgrade.lua
-sed -i 's/Variable1 = "*.*"/Variable1 = "ywt114"/g' package/lean/luci-app-gpsysupgrade/root/usr/bin/upgrade.lua
-sed -i 's/Variable2 = "*.*"/Variable2 = "jump"/g' package/lean/luci-app-gpsysupgrade/root/usr/bin/upgrade.lua
-sed -i 's/Variable3 = "*.*"/Variable3 = "x86_64"/g' package/lean/luci-app-gpsysupgrade/root/usr/bin/upgrade.lua
-sed -i 's/Variable4 = "*.*"/Variable4 = "6.6"/g' package/lean/luci-app-gpsysupgrade/root/usr/bin/upgrade.lua
+# sed -i 's/Variable1 = "*.*"/Variable1 = "ywt114"/g' package/lean/luci-app-gpsysupgrade/luasrc/model/cbi/gpsysupgrade/sysupgrade.lua
+# sed -i 's/Variable2 = "*.*"/Variable2 = "jump"/g' package/lean/luci-app-gpsysupgrade/luasrc/model/cbi/gpsysupgrade/sysupgrade.lua
+# sed -i 's/Variable3 = "*.*"/Variable3 = "x86_64"/g' package/lean/luci-app-gpsysupgrade/luasrc/model/cbi/gpsysupgrade/sysupgrade.lua
+# sed -i 's/Variable4 = "*.*"/Variable4 = "6.6"/g' package/lean/luci-app-gpsysupgrade/luasrc/model/cbi/gpsysupgrade/sysupgrade.lua
+# sed -i 's/Variable1 = "*.*"/Variable1 = "ywt114"/g' package/lean/luci-app-gpsysupgrade/root/usr/bin/upgrade.lua
+# sed -i 's/Variable2 = "*.*"/Variable2 = "jump"/g' package/lean/luci-app-gpsysupgrade/root/usr/bin/upgrade.lua
+# sed -i 's/Variable3 = "*.*"/Variable3 = "x86_64"/g' package/lean/luci-app-gpsysupgrade/root/usr/bin/upgrade.lua
+# sed -i 's/Variable4 = "*.*"/Variable4 = "6.6"/g' package/lean/luci-app-gpsysupgrade/root/usr/bin/upgrade.lua
 
-# 回退passwall到2024年1月29日旧版本
-# cd package/lean/small/luci-app-passwall
-# git reset --hard ecd92aa64174f5e7a200678b4122891764a6b245
-# cd ../../../..
-# \cp -rf package/lean/mosdns/v2dat package/lean/small
-# sed -i 's/CGO_ENABLED=0/CGO_ENABLED=1/g' package/lean/small/sing-box/Makefile
-# sed -i "s/'http/'https/g" package/lean/small/luci-app-passwall/luasrc/view/passwall/global/status.htm
+# # 回退passwall到2024年1月29日旧版本
+# # cd package/lean/small/luci-app-passwall
+# # git reset --hard ecd92aa64174f5e7a200678b4122891764a6b245
+# # cd ../../../..
+# # \cp -rf package/lean/mosdns/v2dat package/lean/small
+# # sed -i 's/CGO_ENABLED=0/CGO_ENABLED=1/g' package/lean/small/sing-box/Makefile
+# # sed -i "s/'http/'https/g" package/lean/small/luci-app-passwall/luasrc/view/passwall/global/status.htm
 
-# 回退v2ray-plugin到2024年08月24日旧版本
-# cd package/lean/small/v2ray-plugin
-# git reset --hard 82eac7940f75b6ed59523c728adca179ab001aaf
-# cd ../../../..
+# # 回退v2ray-plugin到2024年08月24日旧版本
+# # cd package/lean/small/v2ray-plugin
+# # git reset --hard 82eac7940f75b6ed59523c728adca179ab001aaf
+# # cd ../../../..
