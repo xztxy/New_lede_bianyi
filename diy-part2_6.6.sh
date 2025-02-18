@@ -67,8 +67,8 @@ sed -i "s/echo '\[ -n/echo '# \[ -n/g" package/lean/default-settings/files/zzz-d
 # sed -i 's/ssid=*.*/ssid=JUMP/g' package/kernel/mac80211/files/lib/wifi/mac80211.sh
 
 # 添加关机按钮到系统选项
-curl -fsSL https://raw.githubusercontent.com/xztxy/New_lede_bianyi/refs/heads/main/poweroff.htm > feeds/luci/modules/luci-mod-admin-full/luasrc/view/admin_system/poweroff.htm
-curl -fsSL https://raw.githubusercontent.com/xztxy/New_lede_bianyi/refs/heads/main/system.lua > feeds/luci/modules/luci-mod-admin-full/luasrc/controller/admin/system.lua
+# curl -fsSL https://raw.githubusercontent.com/xztxy/New_lede_bianyi/refs/heads/main/poweroff.htm > feeds/luci/modules/luci-mod-admin-full/luasrc/view/admin_system/poweroff.htm
+# curl -fsSL https://raw.githubusercontent.com/xztxy/New_lede_bianyi/refs/heads/main/system.lua > feeds/luci/modules/luci-mod-admin-full/luasrc/controller/admin/system.lua
 
 # # 删除替换默认源插件和添加插件
 # # find ./ | grep Makefile | grep v2ray-geodata | xargs rm -f
