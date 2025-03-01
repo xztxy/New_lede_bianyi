@@ -71,6 +71,8 @@ curl -fsSL https://raw.githubusercontent.com/xztxy/New_lede_bianyi/refs/heads/ma
 # curl -fsSL https://raw.githubusercontent.com/xztxy/New_lede_bianyi/refs/heads/main/system.lua > feeds/luci/modules/luci-mod-admin-full/luasrc/controller/admin/system.lua
 
 # # 删除替换默认源插件和添加插件
+#添加spedix主题插件
+git clone https://github.com/peditx/luci-theme-peditx.git /feeds/peditx
 # # find ./ | grep Makefile | grep v2ray-geodata | xargs rm -f
 # # find ./ | grep Makefile | grep pdnsd-alt | xargs rm -f
 # # \rm -rf feeds/packages/net/v2ray-geodata feeds/packages/net/pdnsd-alt
