@@ -12,5 +12,7 @@
 # echo 'src-git-full helloworld https://github.com/fw876/helloworld.git;main' >> feeds.conf.default
 # echo 'src-git-full lucky https://github.com/gdy666/luci-app-lucky.git;main' >> feeds.conf.default
 # echo 'src-git op_soft https://github.com/xztxy/op_soft.git;main' >> feeds.conf.default
+# 添加带 post-install 的 Feed
+echo 'src-git peditx https://github.com/peditx/luci-theme-peditx.git;main ^post-install="mkdir -p ${FEEDS_DIR}/peditx/luci-theme-peditx && mv ${FEEDS_DIR}/peditx/* ${FEEDS_DIR}/peditx/luci-theme-peditx/"' >> feeds.conf.default
+# 添加其他 Feed
 echo 'src-git kwrt-packages https://github.com/kiddin9/kwrt-packages.git;main' >> feeds.conf.default
-echo 'post-install: mkdir -p peditx/luci-theme-peditx && mv peditx/* peditx/luci-theme-peditx/ 2>/dev/null' >> feeds.conf.default
