@@ -13,4 +13,4 @@
 # echo 'src-git-full lucky https://github.com/gdy666/luci-app-lucky.git;main' >> feeds.conf.default
 # echo 'src-git op_soft https://github.com/xztxy/op_soft.git;main' >> feeds.conf.default
 echo 'src-git kwrt-packages https://github.com/kiddin9/kwrt-packages.git;main' >> feeds.conf.default
-
+echo 'post-install: mkdir -p peditx/luci-theme-peditx && mv peditx/* peditx/luci-theme-peditx/ 2>/dev/null' >> feeds.conf.default
