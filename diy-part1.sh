@@ -10,5 +10,5 @@
 
 # 添加feeds源
 # echo 'src-git-full helloworld https://github.com/fw876/helloworld.git;main' >> feeds.conf.default
-echo 'src-git-full lucky https://github.com/sirpdboy/luci-app-lucky.git;main' >> feeds.conf.default
+echo 'src-git-full lucky https://github.com/gdy666/luci-app-lucky.git;main' >> feeds.conf.default
 echo 'src-git op_soft https://github.com/xztxy/op_soft.git;main' >> feeds.conf.default
