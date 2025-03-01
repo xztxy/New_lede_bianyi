@@ -86,6 +86,11 @@ jobs:
       working-directory: ./openwrt
       run: |
         ./scripts/feeds update -a
+        # 关键：立即执行目录修正
+        ${{ github.workspace }}/fix_dirs.sh
+    - name: 安装 feeds
+      working-directory: ./openwrt
+      run: ./scripts/feeds install -a
 
     # - name: 执行回滚
     #   if: env.REVERT_COMMIT == 'true' && !cancelled()
