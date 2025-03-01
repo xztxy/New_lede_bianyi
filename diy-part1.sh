@@ -9,6 +9,9 @@
 # sed -i "s/src-git-full-full/src-git-full/g" feeds.conf.default
 #修改管理地址
 sed -i 's/192.168.1.1/192.168.15.1/g' package/base-files/files/bin/config_generate
+
+#增加主题
+git clone https://github.com/peditx/luci-theme-peditx.git feeds/luci/themes/luci-theme-peditx
 # 添加feeds源
 # echo 'src-git-full helloworld https://github.com/fw876/helloworld.git;main' >> feeds.conf.default
 #echo 'src-git-full lucky https://github.com/gdy666/luci-app-lucky.git;main' >> feeds.conf.default
