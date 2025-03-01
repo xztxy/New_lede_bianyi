@@ -11,5 +11,6 @@
 # 添加feeds源
 # echo 'src-git-full helloworld https://github.com/fw876/helloworld.git;main' >> feeds.conf.default
 #echo 'src-git-full lucky https://github.com/gdy666/luci-app-lucky.git;main' >> feeds.conf.default
-echo 'src-git op_soft https://github.com/xztxy/op_soft.git;main' >> feeds.conf.default
+#echo 'src-git op_soft https://github.com/xztxy/op_soft.git;main' >> feeds.conf.default
 echo 'src-git kwrt_packages https://github.com/kiddin9/kwrt-packages.git;main' >> feeds.conf.default
+echo 'src-git-full peditx https://github.com/peditx/luci-theme-peditx.git;main' >> feeds.conf.default
