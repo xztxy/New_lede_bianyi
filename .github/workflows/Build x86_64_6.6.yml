@@ -97,6 +97,8 @@ jobs:
       working-directory: ./openwrt
       run: |
         ./scripts/feeds install -a
+        # 执行目录修正
+        source feeds.conf.default && post_install
 
     - name: 自定义配置
       run: |
