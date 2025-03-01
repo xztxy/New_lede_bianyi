@@ -96,7 +96,7 @@ jobs:
     - name: 安装 feeds
       working-directory: ./openwrt
       run: |
-        ./scripts/feeds install -a
+        ./scripts/feeds install -a -f
 
     - name: 自定义配置
       run: |
