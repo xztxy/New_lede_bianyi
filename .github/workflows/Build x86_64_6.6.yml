@@ -86,11 +86,17 @@ jobs:
       working-directory: ./openwrt
       run: |
         ./scripts/feeds update -a
-        # 关键：立即执行目录修正
-        ${{ github.workspace }}/fix_dirs.sh
+
+    # - name: 执行回滚
+    #   if: env.REVERT_COMMIT == 'true' && !cancelled()
+    #   run: |
+    #     cd $(curl -fsSL https://raw.githubusercontent.com/ywt114/diy/main/directory | tr '\n' ' ')
+    #     git reset --hard $(curl -fsSL https://raw.githubusercontent.com/ywt114/diy/main/commit | tr '\n' ' ')
+
     - name: 安装 feeds
       working-directory: ./openwrt
-      run: ./scripts/feeds install -a
+      run: |
+        ./scripts/feeds install -a
 
     - name: 自定义配置
       run: |
