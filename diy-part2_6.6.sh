@@ -72,7 +72,7 @@ curl -fsSL https://raw.githubusercontent.com/xztxy/New_lede_bianyi/refs/heads/ma
 
 # # 删除替换默认源插件和添加插件
 #添加spedix主题插件
-# git clone https://github.com/peditx/luci-theme-peditx.git feeds/luci/themes/luci-theme-peditx
+git clone https://github.com/peditx/luci-theme-peditx.git feeds/luci/themes/luci-theme-peditx
 # # find ./ | grep Makefile | grep v2ray-geodata | xargs rm -f
 # # find ./ | grep Makefile | grep pdnsd-alt | xargs rm -f
 # # \rm -rf feeds/packages/net/v2ray-geodata feeds/packages/net/pdnsd-alt
